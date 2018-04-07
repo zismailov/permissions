@@ -16,9 +16,11 @@ group :development, :test do
   gem "rspec-rails", "~> 3.7"
   gem "rubocop", require: false
   gem "rubocop-rspec", require: false
+  gem "shoulda-matchers", "~> 3.1"
 end
 
 group :development do
+  gem "annotate"
   gem "listen", ">= 3.0.5", "< 3.2"
   gem "web-console", ">= 3.3.0"
 end
