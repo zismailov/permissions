@@ -23,4 +23,30 @@ RSpec.describe User, type: :model do
     it { is_expected.to validate_presence_of :username }
     it { is_expected.to validate_uniqueness_of :username }
   end
+
+  describe "User" do
+    context "when create" do
+      it "valid data" do
+        user = build(:user)
+        expect { user.save }.to change(User, :count).by(1)
+      end
+
+      it "invalid data" do
+        user = build(:user, username: nil)
+        expect { user.save }.to change(User, :count).by(0)
+      end
+    end
+  end
+
+  describe "instance methods" do
+    context ".check_permission?" do
+      let(:user) { create(:user) }
+      let(:permission) { create(:permission, value: false) }
+
+      it "returns permission granted to user" do
+        Permission.grant_permission_to_user({ action: permission.action, value: permission.value }, user)
+        expect(user.check_permission?(permission.action)).to eq(false)
+      end
+    end
+  end
 end

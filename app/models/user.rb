@@ -17,4 +17,11 @@ class User < ApplicationRecord
 
   validates :email, :username, uniqueness: true, on: :create
   validates :email, :username, presence: true, on: :create
+
+  def check_permission?(action)
+    permission = permissions.find_by(action: action).try(:value)
+    return permission unless permission.nil?
+
+    roles.first.permissions.exists?(action: action)
+  end
 end
