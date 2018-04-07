@@ -10,6 +10,8 @@
 #
 
 class User < ApplicationRecord
+  has_many :roles
+
   has_many :permission_users
   has_many :permissions, through: :permission_users
 

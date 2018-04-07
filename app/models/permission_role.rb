@@ -1,18 +1,17 @@
 # == Schema Information
 #
-# Table name: permission_users
+# Table name: permission_roles
 #
 #  id            :integer          not null, primary key
-#  user_id       :integer
+#  role_id       :integer
 #  permission_id :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
 
-class PermissionUser < ApplicationRecord
+class PermissionRole < ApplicationRecord
   belongs_to :permission
-  belongs_to :user
+  belongs_to :role
 
-  validates :permission_id, :user_id, presence: true
-  validates :permission_id, uniqueness: { scope: :user_id }
+  validates :permission_id, :role_id, presence: true
 end

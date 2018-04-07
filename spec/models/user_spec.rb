@@ -14,6 +14,7 @@ require "rails_helper"
 RSpec.describe User, type: :model do
   describe "associations" do
     it { is_expected.to have_many(:permissions).through(:permission_users) }
+    it { is_expected.to have_many :roles }
   end
 
   describe "validations" do
