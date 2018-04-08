@@ -10,16 +10,17 @@
 `rails s`
 
 # CURL
-POST: bin/curl
 
-GET: http://localhost:3000/api/v1/permissions/action_permitted?entity[type]=[User|Role]&entity[id]=ID&permissions[action]=ACTION
+create user: `bin/curl_user`
 
+create permissions: `bin/curl_permissions`
 
 
 ```ruby
 require 'net/http'
 require 'uri'
 
+# Permission
 uri = URI.parse("http://localhost:3000/api/v1/permissions")
 request = Net::HTTP::Post.new(uri)
 request.set_form_data(
@@ -27,6 +28,14 @@ request.set_form_data(
   "entity[type]" => "[User|Role]",
   "permissions[action]" => "ACTION",
   "permissions[value]" => "[true|false]",
+)
+
+# User
+uri = URI.parse("http://localhost:3000/api/v1/users")
+request = Net::HTTP::Post.new(uri)
+request.set_form_data(
+  "user[email]" => "Email",
+  "user[username]" => "Username",
 )
 
 req_options = {
