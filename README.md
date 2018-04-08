@@ -1,24 +1,42 @@
-# README
+# REQUIREMENTS
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# INSTALLATION
+`bundle install`
 
-Things you may want to cover:
+# TESTING
+`rspec`
 
-* Ruby version
+# RUNNING
+`rails s`
 
-* System dependencies
+# CURL
+POST: bin/curl
 
-* Configuration
+GET: http://localhost:3000/api/v1/permissions/action_permitted?entity[type]=[User|Role]&entity[id]=ID&permissions[action]=ACTION
 
-* Database creation
 
-* Database initialization
 
-* How to run the test suite
+```ruby
+require 'net/http'
+require 'uri'
 
-* Services (job queues, cache servers, search engines, etc.)
+uri = URI.parse("http://localhost:3000/api/v1/permissions")
+request = Net::HTTP::Post.new(uri)
+request.set_form_data(
+  "entity[id]" => "ID",
+  "entity[type]" => "[User|Role]",
+  "permissions[action]" => "ACTION",
+  "permissions[value]" => "[true|false]",
+)
 
-* Deployment instructions
+req_options = {
+  use_ssl: uri.scheme == "https",
+}
 
-* ...
+response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+  http.request(request)
+end
+
+# response.code
+# response.body
+```

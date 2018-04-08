@@ -1,0 +1,1 @@
+curl -d 'entity[type]=User&entity[id]=1&permissions[action]=access&permissions[value]=true' 'http://localhost:3000/api/v1/permissions'
