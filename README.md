@@ -16,6 +16,8 @@ create user: `bin/curl_user`
 create permissions: `bin/curl_permissions`
 
 
+# ruby
+
 ```ruby
 require 'net/http'
 require 'uri'
